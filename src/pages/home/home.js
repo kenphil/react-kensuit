@@ -6,6 +6,7 @@ import React from 'react'
 import {Layout, Menu} from 'antd'
 import {DesktopOutlined, PieChartOutlined} from '@ant-design/icons'
 import {Link, Route, Switch, Redirect} from 'react-router-dom'
+import NotFound from "../../components/notFound";
 
 const {Content, Sider} = Layout;
 
@@ -32,9 +33,14 @@ const Home = props => {
         }}
       >
         <Switch>
-          <Route path='/home/1' render={() => (<div>home/1</div>)}/>
+          <Route path='/home/1' exact render={() => (<div>home/1</div>)}/>
           <Route path='/home/2' render={() => (<div>home/2</div>)}/>
-          <Redirect from='' to='/home/1'/>
+          <Route path='/home/*'>
+            <NotFound/>
+          </Route>
+          <Route path='/home'>
+            <Redirect to='/home/1'/>
+          </Route>
         </Switch>
       </Content>
     </Layout>

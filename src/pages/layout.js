@@ -7,6 +7,7 @@ import {Layout, Menu} from 'antd'
 import {Link, Route, Switch, Redirect} from 'react-router-dom'
 import About from "./about/about";
 import Home from "./home/home";
+import beforeEachRoute from './../components/beforeEach'
 import './layout.less'
 
 const {Header} = Layout;
@@ -29,9 +30,13 @@ const LayoutComponent = props => {
       </Header>
       <Layout>
         <Switch>
-          <Route path='/home' component={Home}/>
-          <Route path='/about' component={About}/>
-          <Redirect from='/' to='/home'/>
+          {/* <Route path='/home'><Home/></Route> */}
+          {beforeEachRoute({path: '/home', children: <Home/>})}
+          {/* <Route path='/about'><About/></Route> */}
+          {beforeEachRoute({path: '/about', children: <About/>})}
+          <Route path='/'>
+            <Redirect to='/home'/>
+          </Route>
         </Switch>
       </Layout>
     </Layout>
